@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public string Extensao { get; set;}
         public string Caminho { get; set; }
-        public string CodigoClient { get; set;}
+        public int CodigoClient { get; set;}
     }
 }
