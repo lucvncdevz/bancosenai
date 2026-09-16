@@ -25,10 +25,10 @@ namespace BancoSENAIAPI.Controllers
                 return BadRequest("Nenhum arquivo encontrado");
             }
 
-           /* if (arquivo.Length > tamanhoMax)
+            if (arquivo.Length > tamanhoMax)
             {
                 return BadRequest("Tamanho do arquivo passou de 2MB, então não pode ser enviado");
-            }*/
+            }
 
             if (!Banco._cliente.Any(e => e.CodigoClient == codigoCliente))
             {
@@ -37,13 +37,13 @@ namespace BancoSENAIAPI.Controllers
 
            string extensao = Path.GetExtension(arquivo.FileName).ToLower();
 
-           /* if (extensao != ".png" &&
+            if (extensao != ".png" &&
                 extensao != ".jpg" &&
                 extensao != ".pdf")
             {
                 return BadRequest(
                     "Somente podem ser enviados arquivos do tipo png, jpg ou pdf");
-            }*/
+            }
 
             string pastaCliente = Path.Combine(
                 _caminhoRaiz,
