@@ -11,18 +11,28 @@ namespace BancoSENAIAPI.Controllers
         private static List<Models.DocumentoMetadados> _documentosMetadados = new List<Models.DocumentoMetadados>();
 
         private static int _nextId = 1;
-
         [HttpPost("upload/{codigoClient}")]
-        public async Task<IActionResult> AnexarArquivo(int codigoClient, IFormFile arquivo) 
+        public async Task<IActionResult> AnexarArquivo(int codigoClient, IFormFile arquivo)
         {
-            if(arquivo == null || arquivo.Length == 0)
+            if (arquivo == null || arquivo.Length == 0)
             {
                 return BadRequest("Nenhum arquivo foi enviado.");
             }
 
-            string pastaClient = Path.Combine(_caminhoRaiz, codigoClient.ToString());
+            // R06F - Limite máximo de 2 MB
+            const long limiteMaximo = 2 * 1024 * 1024;
 
-            if(!Directory.Exists(pastaClient))
+            if (arquivo.Length > limiteMaximo)
+            {
+                return BadRequest("O arquivo excede o limite máximo permitido de 2 MB.");
+            }
+
+            string pastaClient = Path.Combine(
+                _caminhoRaiz,
+                codigoClient.ToString()
+            );
+
+            if (!Directory.Exists(pastaClient))
             {
                 Directory.CreateDirectory(pastaClient);
             }
@@ -34,22 +44,25 @@ namespace BancoSENAIAPI.Controllers
 
             using (var stream = new FileStream(caminhoFinal, FileMode.Create))
             {
-                await stream.CopyToAsync(stream);
-            };
+                await arquivo.CopyToAsync(stream);
+            }
 
-            var documentosMetadados= new Models.DocumentoMetadados()
+            var documentoMetadados = new Models.DocumentoMetadados()
             {
-               Id = _nextId++,
-               Name = nomeOriginal,
-               Extensao = extensao,
-               Caminho = nomeOriginal,
-               CodigoClient = codigoClient
-
+                Id = _nextId++,
+                Name = nomeOriginal,
+                Extensao = extensao,
+                Caminho = nomeOriginal,
+                CodigoClient = codigoClient
             };
 
-            _documentosMetadados.Add(documentosMetadados);
+            _documentosMetadados.Add(documentoMetadados);
 
-            return Ok(new {mensagem = "Documento criado com sucesso"});
+            return Ok(new
+            {
+                mensagem = "Documento criado com sucesso"
+            });
         }
+
     }
 }
