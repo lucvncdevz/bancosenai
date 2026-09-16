@@ -27,6 +27,19 @@ namespace BancoSENAIAPI.Controllers
                 return BadRequest("O arquivo excede o limite máximo permitido de 2 MB.");
             }
 
+            // R06G - Extensões permitidas
+            string extensao = Path.GetExtension(arquivo.FileName).ToLowerInvariant();
+
+            string[] extensoesPermitidas = { ".pdf", ".jpg", ".png" };
+
+            if (!extensoesPermitidas.Contains(extensao))
+            {
+                return BadRequest(
+                    "Formato de arquivo não permitido. " +
+                    "Apenas arquivos .pdf, .jpg e .png são aceitos."
+                );
+            }
+
             string pastaClient = Path.Combine(
                 _caminhoRaiz,
                 codigoClient.ToString()
@@ -37,7 +50,6 @@ namespace BancoSENAIAPI.Controllers
                 Directory.CreateDirectory(pastaClient);
             }
 
-            string extensao = Path.GetExtension(arquivo.FileName);
             string nomeOriginal = Path.GetFileNameWithoutExtension(arquivo.FileName);
             string novoNome = $"{codigoClient}.{nomeOriginal}_{Guid.NewGuid()}{extensao}";
             string caminhoFinal = Path.Combine(pastaClient, novoNome);
@@ -63,6 +75,7 @@ namespace BancoSENAIAPI.Controllers
                 mensagem = "Documento criado com sucesso"
             });
         }
+
 
     }
 }
