@@ -6,14 +6,22 @@
     <link rel="stylesheet" href="document.css" />
 </head>
 <body>
-<div class="container" >
+<div class="container">
 
-    <h1> Gestão de documentos</h1>
-    <input type="number" id="codigoCliente" placeholder="Codigo cliente"/><br />
-    <input type="file" id="arquivo" /> <br />
+    <h1>Gestão de documentos</h1>
+    
+    <input type="hidden" id="indexEdicao" value="" />
 
-    <button type="submit" id="bntEnviar" onclick="enviarDocumento()">Enviar</button>
-</div>
-    <script src="documento.js"></script>
+    <input type="number" id="codigoCliente" placeholder="Código cliente"/>
+    <input type="file" id="arquivo" />
+
+    <div class="btn-group">
+        <button type="button" id="btnEnviar" onclick="salvarDocumento()">Enviar</button>
+        <button type="button" id="btnExibir" onclick="exibirDados()">Exibir Dados</button>
+    </div>
+
+    <div id="result"></div>
+
+<script src="documento.js"></script>
 </body>
 </html>
