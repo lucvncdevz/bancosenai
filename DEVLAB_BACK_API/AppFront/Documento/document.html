@@ -1,0 +1,27 @@
+﻿<!DOCTYPE HTML>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />    
+    <title>Gestão de documentos - banco senai</title>
+    <link rel="stylesheet" href="document.css" />
+</head>
+<body>
+<div class="container">
+
+    <h1>Gestão de documentos</h1>
+    
+    <input type="hidden" id="indexEdicao" value="" />
+
+    <input type="number" id="codigoCliente" placeholder="Código cliente"/>
+    <input type="file" id="arquivo" />
+
+    <div class="btn-group">
+        <button type="button" id="btnEnviar" onclick="salvarDocumento()">Enviar</button>
+        <button type="button" id="btnExibir" onclick="exibirDados()">Exibir Dados</button>
+    </div>
+
+    <div id="result"></div>
+
+<script src="documento.js"></script>
+</body>
+</html>
