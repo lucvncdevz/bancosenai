@@ -4,10 +4,11 @@ namespace BancoSENAIAPI.Models
 {
     public class Agencia
     {
-        [Required]
         [Key]
-        public int NumeroAgencia { get; set; } 
+        public int NumeroAgencia { get; set; }
+        [Required]
         public string Cidade { get; set; }
+        [Required]
         public string SiglaEstado { get; set; }
 
     }
