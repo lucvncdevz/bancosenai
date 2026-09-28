@@ -53,9 +53,9 @@ namespace BancoSENAIAPI.DB
             }
         };
 
-        public static List<Client> _cliente = new List<Client>
+        public static List<Cliente> _cliente = new List<Cliente>
         {
-            new Client
+            new Cliente
             {
                 CodigoClient = 1,
                 NomeClient = "Felipe",
@@ -68,7 +68,7 @@ namespace BancoSENAIAPI.DB
                 NumeroAgencia = 1001
             },
 
-            new Client
+            new Cliente
             {
                 CodigoClient = 2,
                 NomeClient = "Caio",
@@ -81,7 +81,7 @@ namespace BancoSENAIAPI.DB
                 NumeroAgencia = 2002
             },
 
-            new Client
+            new Cliente
             {
                 CodigoClient = 3,
                 NomeClient = "Paulo",

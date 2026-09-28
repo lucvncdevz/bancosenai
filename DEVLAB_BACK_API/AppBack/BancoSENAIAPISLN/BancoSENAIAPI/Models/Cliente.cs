@@ -1,6 +1,6 @@
 ﻿namespace BancoSENAIAPI.Models
 {
-    public class Client
+    public class Cliente
     {
         public int CodigoClient {  get; set; }
         public string NomeClient { get; set; }

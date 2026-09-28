@@ -10,10 +10,10 @@ namespace BancoSENAIAPI.Controllers
     public class ClientController : ControllerBase
     {
         // Lista estática simulando o banco de dados com a entidade Client
-        private static List<Client> _clients = new List<Client>
+        private static List<Cliente> _clients = new List<Cliente>
         {
-            new Client { CodigoClient = 1, NomeClient = "João Silva", CPF = "123.456.789-00", NumeroAgencia = 1001, SaldoTotal = 1500.50f, Sexo = "M", Enderco = "Rua A, 123", Cidade = "São Paulo", Estado = "SP" },
-            new Client { CodigoClient = 2, NomeClient = "Maria Souza", CPF = "987.654.321-11", NumeroAgencia = 2002, SaldoTotal = 50000.00f, Sexo = "F", Enderco = "Av B, 456", Cidade = "Rio de Janeiro", Estado = "RJ" }
+            new Cliente { CodigoClient = 1, NomeClient = "João Silva", CPF = "123.456.789-00", NumeroAgencia = 1001, SaldoTotal = 1500.50f, Sexo = "M", Enderco = "Rua A, 123", Cidade = "São Paulo", Estado = "SP" },
+            new Cliente { CodigoClient = 2, NomeClient = "Maria Souza", CPF = "987.654.321-11", NumeroAgencia = 2002, SaldoTotal = 50000.00f, Sexo = "F", Enderco = "Av B, 456", Cidade = "Rio de Janeiro", Estado = "RJ" }
         };
 
         [HttpGet]
@@ -23,7 +23,7 @@ namespace BancoSENAIAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Cadastrar([FromBody] Client novoClient)
+        public IActionResult Cadastrar([FromBody] Cliente novoClient)
         {
             if (_clients.Any(c => c.CodigoClient == novoClient.CodigoClient))
                 return BadRequest(new { message = "Este código de cliente já existe." });
@@ -43,7 +43,7 @@ namespace BancoSENAIAPI.Controllers
         }
 
         [HttpPut("{codigo}")]
-        public IActionResult Alterar(int codigo, [FromBody] Client clientAtualizado)
+        public IActionResult Alterar(int codigo, [FromBody] Cliente clientAtualizado)
         {
             var clientExistente = _clients.FirstOrDefault(c => c.CodigoClient == codigo);
             if (clientExistente == null)
