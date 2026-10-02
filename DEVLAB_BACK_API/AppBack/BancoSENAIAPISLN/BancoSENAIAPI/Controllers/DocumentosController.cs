@@ -73,7 +73,7 @@ namespace BancoSENAIAPI.Controllers
             var documentoNovo = new DocumentoMetadados
             {
                 Id = _nextId++,
-                Name = nomeOriginal,
+                Nome = nomeOriginal,
                 Extensao = extensao,
                 Caminho = caminhoFinal,
                 CodigoClient = codigoCliente
@@ -139,7 +139,7 @@ namespace BancoSENAIAPI.Controllers
             return File(
                 fileBytes,
                 contentType,
-                documento.Name + documento.Extensao);
+                documento.Nome + documento.Extensao);
         }
 
         [HttpDelete("cliente/{codigoCliente}/excluir/{id}")]
